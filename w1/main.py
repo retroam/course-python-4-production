@@ -43,6 +43,17 @@ def revenue_per_region(dp: DataProcessor) -> Dict:
         'United States': 121.499
     }
     """
+    datareader_gen = (row for row in dp.data_reader)
+    _ = next(datareader_gen)
+    res = {}
+    for row in tqdm(datareader_gen):
+        if row['Country'] not in res:
+            res[row['Country']] = row['TotalPrice']
+        else:
+            res[row['Country']] += row['TotalPrice']
+
+    return res
+    
     ######################################## YOUR CODE HERE ##################################################
 
     ######################################## YOUR CODE HERE ##################################################
