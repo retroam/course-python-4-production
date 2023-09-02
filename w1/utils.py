@@ -2,6 +2,7 @@ from typing import Dict
 import numpy as np
 from typing import Generator, List
 import os
+import csv
 
 CURRENT_FOLDER = os.path.dirname(os.path.abspath(__file__))
 
@@ -111,6 +112,11 @@ class DataReader:
             'Country': 'Russia',
         }
         """
+        with open(self._fp, newline='') as csvfile:
+            rows = csv.reader(csvfile, delimiter=self._sep)
+            for row in rows:
+                yield {self._col_names[i]: v for i,v in enumerate(row)}
+
     ######################################## YOUR CODE HERE ##################################################
 
     ######################################## YOUR CODE HERE ##################################################
